@@ -7,7 +7,7 @@ int main() {
     scanf("%f", &celsius);
 
     fahrenheit = (celsius * 9/5) + 32;
-
+    
     printf("%.2f Celsius is equal to %.2f Fahrenheit\n", celsius, fahrenheit);
 
     return 0;
