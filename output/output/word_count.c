@@ -1,37 +1,26 @@
 #include <stdio.h>
+#include <ctype.h>  // Include the header for character classification functions
 
-#define IN  1 /* inside a word */
-#define OUT 0 /* outside a word */
+#define YES 1
+#define NO  0
 
-int is_letter_or_digit(int c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
-}
+int main() {  // Use int as the return type for main
+    int c, nl, nw, nc, inword;
 
-/* count lines, words, and characters in input */
-int main() {
-    int c, nl, nw, nc, state;
-
-    state = OUT;
+    inword = NO;
     nl = nw = nc = 0;
-
     while ((c = getchar()) != EOF) {
         ++nc;
-        if (c == '\n') {
+        if (c == '\n')
             ++nl;
-        }
-        if (c == ' ' || c == '\n' || c == '\t') {
-            state = OUT;
-        } else if (state == OUT) {
-            state = IN;
-
-            // Check if the first character of the word is a letter
-            if (is_letter_or_digit(c)) {
-                ++nw;
-            }
+        if (c == ' ' || c == '\n' || c == '\t')
+            inword = NO;
+        else if (inword == NO && isalpha(c)) {  // Check if the character is a letter
+            inword = YES;
+            ++nw;
         }
     }
-
     printf("%d %d %d\n", nl, nw, nc);
-
-    return 0;
+    
+    return 0;  // Return a value from main
 }
